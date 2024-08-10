@@ -122,6 +122,24 @@
                 <artifactId>wechatpay-apache-httpclient</artifactId>
                 <version>0.4.8</version>
             </dependency>
+
+            <!-- 添加 Jackson CBOR 格式的依赖 -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-cbor</artifactId>
+                <version>2.13.4</version>
+            </dependency>
+            <!-- 如果使用Spring Boot, 可能还需要添加下面的依赖 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>2.7.3</version>
+            </dependency>
+
+
+
+
+
         </dependencies>
     </dependencyManagement>
 </project>
