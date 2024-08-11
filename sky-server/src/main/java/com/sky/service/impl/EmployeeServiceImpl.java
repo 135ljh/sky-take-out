@@ -111,4 +111,23 @@ public class EmployeeServiceImpl implements EmployeeService {
         return new PageResult(total,records);
     }
 
+
+    /*启用禁用员工账号*/
+    public void startOrStop(Integer status,Long id){
+        //执行修改/更新的sql语句
+        //建议写成动态的，这样复用性强一些
+
+       /* Employee employee=new Employee();
+        employee.setStatus(status);
+        employee.setId(id);*/
+
+        Employee employee=Employee.builder()
+                .status(status)
+                .id(id)
+                .build();
+
+
+        employeeMapper.update(employee);
+    }
+
 }

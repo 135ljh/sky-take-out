@@ -30,4 +30,7 @@ public interface EmployeeMapper {
     * 分页查询*/
     //动态sql使用映射文件方便些，不使用注解开发
     Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
+
+    /*根据主键动态修改属性*/
+    void update(Employee employee);
 }
