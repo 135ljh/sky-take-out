@@ -83,13 +83,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         //设置密码,默认密码123456
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
 
-        //设置当前记录的创建时间和修改时间
+        //已做好公共字段自动填充
+        /*//设置当前记录的创建时间和修改时间
         employee.setCreateTime(LocalDateTime.now());
         employee.setUpdateTime(LocalDateTime.now());
 
         //设置当前记录创建人id和修改人id
         employee.setCreateUser(BaseContext.getCurrentId());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+        employee.setUpdateUser(BaseContext.getCurrentId());*/
 
         employeeMapper.insert(employee);
 
@@ -109,6 +110,44 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Employee> records=page.getResult();
 
         return new PageResult(total,records);
+    }
+
+
+    /*启用禁用员工账号*/
+    public void startOrStop(Integer status,Long id){
+        //执行修改/更新的sql语句
+        //建议写成动态的，这样复用性强一些
+
+       /* Employee employee=new Employee();
+        employee.setStatus(status);
+        employee.setId(id);*/
+
+        Employee employee=Employee.builder()
+                .status(status)
+                .id(id)
+                .build();
+
+
+        employeeMapper.update(employee);
+    }
+
+
+    /*根据id查询员工*/
+    public Employee getById(Long id){
+        Employee employee=employeeMapper.getById(id);
+        employee.setPassword("****");
+        return employee;
+    }
+
+    /*编辑员工信息*/
+    public void update(EmployeeDTO employeeDTO){
+        Employee employee=new Employee();
+        BeanUtils.copyProperties(employeeDTO,employee);
+
+        //employee.setUpdateTime(LocalDateTime.now());
+        //employee.setUpdateUser(BaseContext.getCurrentId());
+        employeeMapper.update(employee);
+
     }
 
 }
